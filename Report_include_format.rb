@@ -15,24 +15,27 @@ class Report
 	puts('  <body>')
     else
       raise "Unknow format: #{format}"
-  end
-
-  @text.eacho do |line|
-    if format == :plain
-      puts(line)
-    else
-      puts("  <p>#{line}</p>")
     end
-  end
 
-  if format == :html
-    puts('</body>')
-    puts('</html>')
-  end
+    @text.each do |line|
+      if format == :plain
+        puts(line)
+      else
+        puts("  <p>#{line}</p>")
+      end
+    end
 
+    if format == :html
+      puts('</body>')
+      puts('</html>')
+    end
+
+  end
 end
 
-
+puts "------------------HTML------------------"
 my_report = Report.new
-my_report.output_report
-
+my_report.output_report(:html)
+puts "-----------------Plain------------------"
+plain_report = Report.new
+plain_report.output_report(:plain)
