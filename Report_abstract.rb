@@ -2,7 +2,7 @@ class Report
   
   def initialize
     @title = 'Monthly Report'
-	@text = ['Things are going','really,really well.']
+    @text = ['Things are going','really,really well.']
   end
 
   def output_report
@@ -45,3 +45,68 @@ class Report
   end
 
 end
+
+
+#Add HTML Report
+
+class HTMLReport < Report
+
+  def output_start
+    puts '<html>'
+  end
+
+  def output_body_start
+    puts '<body>'
+  end
+
+  def output_head
+    puts '<head>'
+    puts("  <title>#{@title}</title>")
+    puts '</head>'
+  end
+
+  def output_line(line)
+    puts '<p>#{line}</p>'
+  end
+
+  def output_body_end
+    puts '</body>'
+  end
+
+  def output_end
+    puts '</html>'
+  end
+
+end
+
+#Define Plain Report
+class PlainTextReport < Report
+
+  def output_start
+  end
+
+  def output_head
+    puts '****#{@title}****'
+    puts
+  end
+
+  def output_body_start
+  end
+
+  def output_line(line)
+    puts(line)
+  end
+
+  def output_body_end
+  end
+
+  def output_end
+  end
+end
+
+html_report = HTMLReport.new
+html_report.output_report
+
+plain_report = PlainTextReport.new
+plain_report.output_report
+
